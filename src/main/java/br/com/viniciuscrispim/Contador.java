@@ -1,16 +1,33 @@
 package br.com.viniciuscrispim;
 
+import br.com.exception.ParametrosInvalidosException;
+
 import java.util.Scanner;
 
 public class Contador {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Digite o primeiro parâmetro");
-        int parametroUm = input.nextInt();
-        System.out.println("Digite o segundo parâmetro");
-        int parametroDois = input.nextInt();
+        var input = new Scanner(System.in);
+        try{
+            System.out.println("Digite o primeiro parâmetro");
+            var parametroUm = input.nextInt();
+            System.out.println("Digite o segundo parâmetro");
+            var parametroDois = input.nextInt();
 
-        System.out.println("Parametro 1: " + parametroUm);
-        System.out.println("Parametro 2: " + parametroDois);
+            contar(parametroUm, parametroDois);
+        } catch (ParametrosInvalidosException e) {
+            System.out.println("O segundo parâmetro precisa ser maior que o primeiro.");
+        }
+
+    }
+
+    static void contar(int parametroUm, int parametroDois ) throws ParametrosInvalidosException {
+        if(parametroUm > parametroDois) {
+            throw new ParametrosInvalidosException("Parâmetros inválidos");
+        }
+
+        int contagem = parametroDois - parametroUm;
+        for (int i = 1; i <= contagem; i++) {
+            System.out.println("Imprimindo o número " + i);
+        }
     }
 }
